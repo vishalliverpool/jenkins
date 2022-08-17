@@ -64,6 +64,8 @@ Once the pod is running, you need to expose it using a Service. You will use the
 
 Create and open a new file called jenkins-service.yaml:
 
+
+
 Step 3
 nano jenkins-service.yaml
 Add the following code to define the NodePort Service:
@@ -99,8 +101,11 @@ In the above YAML file, you define your NodePort Service and then expose port 80
 
 Now create the Service in the same namespace:
 
+step 4 
 kubectl create -f jenkins-service.yaml --namespace jenkins
 Check that the Service is running:
+
+step 5
 
 kubectl get services --namespace jenkins
 You will receive an output like this:
@@ -110,11 +115,12 @@ NAME      TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 jenkins   NodePort   your_cluster_ip   <none>        8080:30000/TCP   15d
 With NodePort and Jenkins operational, you are ready to access the Jenkins UI and begin exploring it.
 
-Step 2 — Accessing the Jenkins UI
+Step 6 — Accessing the Jenkins UI
 In this step, you will access and explore the Jenkins UI. Your NodePort service is accessible on port 30000 across the cluster nodes. You need to retrieve a node IP to access the Jenkins UI.
 
 Use kubectl to retrieve your node IPs:
 
+  Step 7 
 kubectl get nodes -o wide
 kubectl will produce an output with your external IPs:
 
@@ -133,6 +139,7 @@ Let’s use kubectl to pull the password from those logs.
 
 First, return to your terminal and retrieve your Pod name:
 
+  Step 8
 kubectl get pods -n jenkins
 You will receive an output like this:
 
@@ -140,6 +147,8 @@ NAME                       READY   STATUS    RESTARTS   AGE
 jenkins-6fb994cfc5-twnvn   1/1     Running   0          9m54s
 Next, check the Pod’s logs for the admin password. Replace the highlighted section with your pod name:
 
+Step 9
+  
 kubectl logs jenkins-6fb994cfc5-twnvn -n jenkins
 You might need to scroll up or down to find the password:
 
